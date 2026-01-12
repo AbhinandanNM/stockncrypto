@@ -3,6 +3,10 @@
     "outputDirectory": "frontend/dist",
     "rewrites": [
         {
+            "source": "/api/health",
+            "destination": "https://stockncrypto.onrender.com/api/health"
+        },
+        {
             "source": "/api/:path*",
             "destination": "https://stockncrypto.onrender.com/api/:path*"
         },
