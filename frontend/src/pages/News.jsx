@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import Navbar from '../components/Navbar';
 
 const News = () => {
@@ -14,7 +14,7 @@ const News = () => {
     const fetchNews = async () => {
         try {
             const params = filter !== 'all' ? `?category=${filter}` : '';
-            const response = await axios.get(`/api/news${params}`);
+            const response = await api.get(`/news${params}`);
             setNews(response.data);
         } catch (error) {
             console.error('Failed to fetch news:', error);
@@ -80,8 +80,8 @@ const News = () => {
                             <div key={article.id} className="card">
                                 <div className="flex-between mb-1">
                                     <span className={`badge badge-${article.category === 'crypto' ? 'warning' :
-                                            article.category === 'stocks' ? 'primary' :
-                                                'success'
+                                        article.category === 'stocks' ? 'primary' :
+                                            'success'
                                         }`}>
                                         {article.category}
                                     </span>

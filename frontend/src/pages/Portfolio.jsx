@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import Navbar from '../components/Navbar';
 
 const Portfolio = () => {
@@ -21,7 +21,7 @@ const Portfolio = () => {
 
     const fetchPortfolio = async () => {
         try {
-            const response = await axios.get('/api/portfolio');
+            const response = await api.get('/portfolio');
             setHoldings(response.data);
         } catch (error) {
             console.error('Failed to fetch portfolio:', error);
@@ -35,7 +35,7 @@ const Portfolio = () => {
         setError('');
 
         try {
-            await axios.post('/api/portfolio', {
+            await api.post('/portfolio', {
                 ...formData,
                 quantity: parseFloat(formData.quantity),
                 purchasePrice: parseFloat(formData.purchasePrice)
@@ -53,7 +53,7 @@ const Portfolio = () => {
         if (!confirm('Are you sure you want to remove this holding?')) return;
 
         try {
-            await axios.delete(`/api/portfolio/${id}`);
+            await api.delete(`/portfolio/${id}`);
             fetchPortfolio();
         } catch (error) {
             console.error('Failed to delete holding:', error);

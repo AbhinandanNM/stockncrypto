@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import Navbar from '../components/Navbar';
 
 const Watchlist = () => {
@@ -14,7 +14,7 @@ const Watchlist = () => {
 
     const fetchWatchlist = async () => {
         try {
-            const response = await axios.get('/api/watchlist');
+            const response = await api.get('/watchlist');
             setWatchlist(response.data);
         } catch (error) {
             console.error('Failed to fetch watchlist:', error);
@@ -26,7 +26,7 @@ const Watchlist = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/watchlist', formData);
+            await api.post('/watchlist', formData);
             setShowModal(false);
             setFormData({ symbol: '', name: '', type: 'stock' });
             fetchWatchlist();
@@ -37,7 +37,7 @@ const Watchlist = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/watchlist/${id}`);
+            await api.delete(`/watchlist/${id}`);
             fetchWatchlist();
         } catch (error) {
             console.error('Failed to remove from watchlist:', error);

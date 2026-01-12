@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import Navbar from '../components/Navbar';
 
 const Crypto = () => {
@@ -12,7 +12,7 @@ const Crypto = () => {
 
     const fetchCryptos = async () => {
         try {
-            const response = await axios.get('/api/crypto/top?limit=20');
+            const response = await api.get('/crypto/top?limit=20');
             setCryptos(response.data);
         } catch (error) {
             console.error('Failed to fetch crypto data:', error);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import Navbar from '../components/Navbar';
 import './Dashboard.css';
 
@@ -16,9 +16,9 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
         try {
             const [portfolioRes, transactionsRes, statsRes] = await Promise.all([
-                axios.get('/api/portfolio'),
-                axios.get('/api/transactions'),
-                axios.get('/api/transactions/stats')
+                api.get('/portfolio'),
+                api.get('/transactions'),
+                api.get('/transactions/stats')
             ]);
 
             setPortfolio(portfolioRes.data.slice(0, 5));

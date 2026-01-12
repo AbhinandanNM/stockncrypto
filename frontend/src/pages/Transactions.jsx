@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import Navbar from '../components/Navbar';
 
 const Transactions = () => {
@@ -22,7 +22,7 @@ const Transactions = () => {
 
     const fetchTransactions = async () => {
         try {
-            const response = await axios.get('/api/transactions');
+            const response = await api.get('/transactions');
             setTransactions(response.data);
         } catch (error) {
             console.error('Failed to fetch transactions:', error);
@@ -34,7 +34,7 @@ const Transactions = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/transactions', {
+            await api.post('/transactions', {
                 ...formData,
                 quantity: parseFloat(formData.quantity),
                 price: parseFloat(formData.price)
@@ -50,7 +50,7 @@ const Transactions = () => {
     const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to delete this transaction?')) return;
         try {
-            await axios.delete(`/api/transactions/${id}`);
+            await api.delete(`/transactions/${id}`);
             fetchTransactions();
         } catch (error) {
             console.error('Failed to delete transaction:', error);
