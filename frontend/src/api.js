@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // API Configuration
-// For production, use the Render backend URL directly if the Vercel proxy is not configured
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://stockncrypto.onrender.com/api';
+// Hardcoded for production deployment
+const API_BASE_URL = 'https://stockncrypto.onrender.com/api';
 
 // Create axios instance with base URL for production
 const api = axios.create({
